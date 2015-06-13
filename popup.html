@@ -7,19 +7,9 @@
 <html>
 <head>
 	<title>Getting Started Extension's Popup</title>
-	<style>
-		body {
-			font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
-			font-size: 100%;
-		}
-		#status {
-			/* avoid an excessively wide status text */
-			white-space: pre;
-			text-overflow: ellipsis;
-			overflow: hidden;
-			max-width: 400px;
-		}
-	</style>
+
+	<link href="css/libraries/bootstrap-3.3.4/bootstrap.min.css" rel="stylesheet">
+	<link href="css/base.css" rel="stylesheet">
 
 	<!--
 	  - JavaScript and HTML must be in separate files: see our Content Security
@@ -27,9 +17,13 @@
 	  -
 	  - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
 	 -->
-	<script src="popup.js"></script>
+	<script src="js/libaries/jquery-2.1.4/jquery-2.1.4.min.js"></script>
+	<script src="js/libaries/bootstrap-3.3.4/bootstrap.min.js"></script>
 </head>
 <body>
 	<h1>Hello World!</h1>
+	<button type="button" class="btn btn-default" aria-label="Left Align">
+		<span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+	</button>
 </body>
 </html>
