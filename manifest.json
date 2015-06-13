@@ -5,18 +5,18 @@
 	"version": "1.0",
 
 	"icons": {
-		"16": "images/g5-icon-trace-16.png.png",
-		"19": "images/g5-icon-trace-19.png.png",
-		"32": "images/g5-icon-trace-32.png.png",
-		"38": "images/g5-icon-trace-38.png.png",
-		"48": "images/g5-icon-trace-48.png.png",
-		"64": "images/g5-icon-trace-64.png.png",
-		"128": "images/g5-icon-trace-128.png.png"
+		"16": "images/g5-icon-trace-16.png",
+		"19": "images/g5-icon-trace-19.png",
+		"32": "images/g5-icon-trace-32.png",
+		"38": "images/g5-icon-trace-38.png",
+		"48": "images/g5-icon-trace-48.png",
+		"64": "images/g5-icon-trace-64.png",
+		"128": "images/g5-icon-trace-128.png"
 	},
 	"browser_action": {
 		"default_icon": {
-			"19": "images/g5-icon-trace-19.png.png",
-			"38": "images/g5-icon-trace-38.png.png"
+			"19": "images/g5-icon-trace-19.png",
+			"38": "images/g5-icon-trace-38.png"
 		},
 		"default_popup": "popup.html"
 	},
