@@ -1,3 +1,31 @@
 body {
   color: #008cfe;
+  width: 800px;
+}
+header {
+  border-bottom: #004886 3px solid;
+}
+main {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+footer {
+  border-top: #004886 3px solid;
+}
+/* Custom color for bootstrap switch */
+.bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-red,
+.bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-red {
+  color: #FFF;
+  background: #B85C5C;
+}
+.feature label {
+  padding-left: 10px;
+  padding-right: 20px;
+}
+.feature .description {
+  cursor: pointer;
+}
+#g5Logo {
+  text-indent: -200px;
+  overflow: hidden;
 }
