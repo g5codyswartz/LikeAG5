@@ -2,8 +2,7 @@
 	"manifest_version": 2,
 	"name": "Like A G5",
 	"description": "Chrome extension for the G5 platform to provided additional injected functionality. All copyrights belong to their respective owners.",
-	"version": "1.0",
-
+	"version": "1.0.0",
 	"icons": {
 		"16": "images/g5-icon-trace-16.png",
 		"19": "images/g5-icon-trace-19.png",
@@ -23,6 +22,20 @@
 	"options_page": "options.html",
 	"permissions": [
 		"activeTab",
-		"https://ajax.googleapis.com/"
-	]
+		"https://ajax.googleapis.com/",
+		"*://*.herokuapp.com/",
+		"*://*.g5dns.com/",
+		"*://*.g5dxm.com/"
+	],
+	"content_scripts": [
+		{
+			"matches": ["*://*.herokuapp.com/", "*://*.g5dns.com/", "*://*.g5dxm.com/"],
+			//"css": ["mystyles.css"],
+			"js": ["js/libraries/jquery-2.1.4/jquery-2.1.4.min.js", "js/main.js"]
+		}
+	],
+	"background": {
+		"scripts": ["js/libraries/jquery-2.1.4/jquery-2.1.4.min.js", "js/main.js"],
+		"persistent": false
+	}
 }
