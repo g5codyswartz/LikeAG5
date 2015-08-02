@@ -29,13 +29,23 @@
 	],
 	"content_scripts": [
 		{
-			"matches": ["*://*.herokuapp.com/", "*://*.g5dns.com/", "*://*.g5dxm.com/"],
+			"matches": ["*://*.herokuapp.com/*", "*://*.g5dns.com/*", "*://*.g5dxm.com/*"],
 			//"css": ["mystyles.css"],
-			"js": ["js/libraries/jquery-2.1.4/jquery-2.1.4.min.js", "js/main.js"]
+			"js": [
+				"js/libraries/jquery-2.1.4/jquery-2.1.4.min.js",
+				"js/typescript/AutoPlaceholder.js",
+				"js/typescript/Hooks.js",
+				"js/main.js"
+			]
 		}
 	],
 	"background": {
-		"scripts": ["js/libraries/jquery-2.1.4/jquery-2.1.4.min.js", "js/main.js"],
+		"scripts": [
+			"js/libraries/jquery-2.1.4/jquery-2.1.4.min.js",
+			"js/typescript/AutoPlaceholder.js",
+			"js/typescript/Hooks.js",
+			"js/main.js"
+		],
 		"persistent": false
 	}
 }

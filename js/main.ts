@@ -4,12 +4,17 @@
 
 //import AutoPlaceholer = require("typescript/AutoPlaceholder");
 
-$(function(){
+$( ()=> {
     // Enable all the Bootstrap Switches
     //$(".bsSwitch").bootstrapSwitch();
-    //console.log("Hello world!");
-    alert("helllo");
+    console.log("LikeAG5 Initialized");
 
-    LikeAG5.AutoPlaceholder.inject();
+    var hooks = new LikeAG5.Hooks();
+    var autoPlaceholder = new LikeAG5.AutoPlaceholder;
+
+    autoPlaceholder.inject(hooks);
 
 });
+
+
+

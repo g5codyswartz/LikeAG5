@@ -5,8 +5,9 @@
 $(function () {
     // Enable all the Bootstrap Switches
     //$(".bsSwitch").bootstrapSwitch();
-    //console.log("Hello world!");
-    alert("helllo");
-    LikeAG5.AutoPlaceholder.inject();
+    console.log("LikeAG5 Initialized");
+    var hooks = new LikeAG5.Hooks();
+    var autoPlaceholder = new LikeAG5.AutoPlaceholder;
+    autoPlaceholder.inject(hooks);
 });
 //# sourceMappingURL=main.js.map
