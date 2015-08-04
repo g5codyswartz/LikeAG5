@@ -52,6 +52,21 @@ var LikeAG5;
             delete this.elHooks[elSelector][eventName];
             return true;
         };
+        Hooks.prototype.findElement = function (elSelector, callback, tickSpeed, tickCycleTimeout) {
+            if (tickSpeed === void 0) { tickSpeed = 2000; }
+            if (tickCycleTimeout === void 0) { tickCycleTimeout = 120; }
+            var select = $(elSelector);
+            console.log(select);
+            console.log(select.length);
+            if (select.length) {
+                console.log("FOUND! :D");
+                callback();
+            }
+            else {
+                console.log("NOT FOUND :(");
+                setTimeout(this.findElement(elSelector, callback, tickSpeed, tickCycleTimeout), tickSpeed);
+            }
+        };
         Hooks.observerConfig = { attributes: true, childList: true, characterData: true };
         return Hooks;
     })();

@@ -73,5 +73,23 @@ module LikeAG5 {
 	        return true;
         }
 
+        public findElement(elSelector: string, callback: ()=>any, tickSpeed = 2000, tickCycleTimeout = 120) {
+
+            var select = $(elSelector);
+            console.log(select);
+            console.log(select.length);
+
+            if (select.length)
+            {
+                console.log("FOUND! :D");
+                callback();
+            }
+            else
+            {
+                console.log("NOT FOUND :(");
+                setTimeout(this.findElement(elSelector, callback, tickSpeed, tickCycleTimeout), tickSpeed);
+            }
+        }
+
     }
 }
