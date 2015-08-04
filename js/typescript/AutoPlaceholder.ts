@@ -4,48 +4,68 @@
 /// <reference path="./Hooks.ts" />
 
 module LikeAG5 {
-    export class AutoPlaceholder implements Injectable {
+	export class AutoPlaceholder implements Injectable {
 
-        inject(hooks: Hooks) {
+		inject(hooks:Hooks) {
 
-            console.log("AutoPlaceholder Injected");
+			console.log("AutoPlaceholder Injected");
 
-            hooks.setjQueryBind(HookType.ModalVisible, "AutoPlaceholder", function() {
+			hooks.addDOMMutationObserver('autoPlaceholder', domMutationCallback);
 
-                console.log("AutoPlaceholder Triggered");
+			// todo need to make sure that the targetWatch exists first
+			var targetWatch = document.querySelector('.ember-view>.page');
+			hooks.addObserverTarget('autoPlaceholder', targetWatch);
 
-                var liquidPlaceholders = $('[placeholder^="{{"]');
+			function domMutationCallback() {
 
-                liquidPlaceholders.after(function() {
-                    var placeHolderVal = $(this).attr('placeholder');
-                    return '<button class="autoPlacer" phVal="'+placeHolderVal+'">AutoPlace</button>';
-                });
+				console.log("AutoPlaceholder DOM Mutation Callback triggered");
 
-                $('.autoPlacer').click(function(e){
-                    e.preventDefault(); // prevent form submission
+				// todo Add logic to determine What DOM mutation triggers the hooks.setjQueryBind to be set
+				/*function(mutations) {
 
-                    var placeHolderVal = $(this).attr('phVal');
-                    var neighbor = $(this).parent().children('[placeholder^="{{"]')[0];
+				 mutations.forEach(function(mutation) {
+				 //console.log(mutation.type);
+				 console.log(mutation);
+				 });
+				 }*/
 
-                    $(neighbor).val(placeHolderVal);
+				hooks.setjQueryBind('#modal', 'isVisible', function () {
 
-                    // maybe double click for fill in? need timer that resets a counter attribute on the element
-                    // get parent and then the placeholder within the parent
-                    // if jQuery defaultly supported background-color I would use that and the jQuery animate
+					console.log("AutoPlaceholder Modal Is Visible Triggered");
+
+					var liquidPlaceholders = $('[placeholder^="{{"]');
+
+					liquidPlaceholders.after(function () {
+						var placeHolderVal = $(this).attr('placeholder');
+						return '<button class="autoPlacer" phVal="' + placeHolderVal + '">AutoPlace</button>';
+					});
+
+					$('.autoPlacer').click(function (e) {
+						e.preventDefault(); // prevent form submission
+
+						var placeHolderVal = $(this).attr('phVal');
+						var neighbor = $(this).parent().children('[placeholder^="{{"]')[0];
+
+						$(neighbor).val(placeHolderVal);
+
+						// maybe double click for fill in? need timer that resets a counter attribute on the element
+						// get parent and then the placeholder within the parent
+						// if jQuery defaultly supported background-color I would use that and the jQuery animate
 
 
-                });
+					});
 
-                if (localStorage.getItem("forceAutoPlace") == "true")
-                {
-                    liquidPlaceholders.each(function(){
-                        $(this).val($(this).attr('placeholder'));
-                    });
-                }
+					if (localStorage.getItem("forceAutoPlace") == "true") {
+						liquidPlaceholders.each(function () {
+							$(this).val($(this).attr('placeholder'));
+						});
+					}
 
-            });
+				});
+
+			}
 
 
-        }
-    }
+		}
+	}
 }

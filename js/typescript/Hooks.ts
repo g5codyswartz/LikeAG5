@@ -10,40 +10,35 @@ module LikeAG5 {
     export class Hooks {
 
         private elHooks: { [elSelector: string] : { [eventName: string]: ()=>any } };
-	    private observerHooks;
-        private observer: MutationObserver;
+        private observers: { [name: string]: MutationObserver};
         private static observerConfig = { attributes: true, childList: true, characterData: true };
 
         constructor() {
             this.elHooks = {};
-	        this.observerHooks = {};
-
-	        // https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver
-	        // create an observer instance
-	        this.observer = new MutationObserver(function(mutations) {
-		        mutations.forEach(function(mutation) {
-			        //console.log(mutation.type);
-			        console.log(mutation);
-		        });
-	        });
+	        this.observers = {};
 
         }
 
-	    public addObserver(target: HTMLElement) {
+	    public addDOMMutationObserver(name: string, callback: (mutations)=>any) {
 
+		    // https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver
+		    // create an observers instance
+		    this.observers[name] = new MutationObserver(callback);
+	    }
+
+	    public addObserverTarget(observerName: string, target: HTMLElement|Element) {
 		    // select the target node
 		    //var target = document.querySelector('.ember-view>.page');
 
-		    // pass in the target node, as well as the observer options
-		    this.observer.observe(target, Hooks.observerConfig);
-
+		    // pass in the target node, as well as the observers options
+		    this.observers[observerName].observe(target, Hooks.observerConfig);
 	    }
 
 	    public removeObserver() {
 		    /* todo
-		        Find out if we can just overwrite the observer target with an empty function,
+		        Find out if we can just overwrite the observers target with an empty function,
 		        if we can add multiple callbacks.
-		        Or if we need to disconnect the observer, clean our cache, and then reinitialize our observers
+		        Or if we need to disconnect the observers, clean our cache, and then reinitialize our observers
 		     */
 	    }
 
@@ -55,7 +50,7 @@ module LikeAG5 {
 
             // check if event has been entered yet
             if (this.elHooks[elSelector][eventName] == undefined) {
-	            console.log("New Hook for Modal Visible: "+name);
+	            console.log("New Hook for: $('"+elSelector+"') Event: "+eventName);
 	            $(elSelector).bind(eventName, callback);
 
 	            this.elHooks[elSelector][eventName] = callback;
@@ -63,29 +58,19 @@ module LikeAG5 {
             else
                 return false;
 
-
-            switch(hookType)
-            {
-                case HookType.CMSEditorLoaded:
-
-
-
-                    break;
-                case HookType.ModalVisible:
-                    console.log("New Hook for Modal Visible: "+name);
-                    $('#modal').bind('isVisible', callback);
-                    break;
-            }
+	        return true;
         }
 
         public RemovejQueryBind(elSelector: string, eventName: string) {
-            // check if the element has been entered and check if event has been entered
+            // check if the element and event has been entered
             if (this.elHooks[elSelector] == undefined || this.elHooks[elSelector][eventName] == undefined)
                 return false;
 
 	        // remove the jquery bind and our cache
 	        $(elSelector).unbind(eventName, this.elHooks[elSelector][eventName]);
             delete this.elHooks[elSelector][eventName];
+
+	        return true;
         }
 
     }
