@@ -52,19 +52,29 @@ var LikeAG5;
             delete this.elHooks[elSelector][eventName];
             return true;
         };
+        // 120 ticks @ 250ms = 30 seconds
         Hooks.prototype.findElement = function (elSelector, callback, tickSpeed, tickCycleTimeout) {
-            if (tickSpeed === void 0) { tickSpeed = 2000; }
+            // Pass this to anon functions: http://thomasdavis.github.io/tutorial/anonymous-functions.html
+            if (tickSpeed === void 0) { tickSpeed = 250; }
             if (tickCycleTimeout === void 0) { tickCycleTimeout = 120; }
             var select = $(elSelector);
             console.log(select);
             console.log(select.length);
+            var i = 0;
+            // maybe a while: not found and under tick
+            // nevermind that breaks the recurring calling + delay
             if (select.length) {
                 console.log("FOUND! :D");
                 callback();
             }
             else {
                 console.log("NOT FOUND :(");
-                setTimeout(this.findElement(elSelector, callback, tickSpeed, tickCycleTimeout), tickSpeed);
+                setTimeout((function (scope) {
+                    if (i < tickCycleTimeout)
+                        scope.findElement(elSelector, callback, tickSpeed, tickCycleTimeout);
+                    i++;
+                    console.log("i:" + i);
+                })(this), tickSpeed);
             }
         };
         Hooks.observerConfig = { attributes: true, childList: true, characterData: true };
