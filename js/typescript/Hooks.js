@@ -73,7 +73,7 @@ var LikeAG5;
                     if (i < tickCycleTimeout)
                         scope.findElement(elSelector, callback, tickSpeed, tickCycleTimeout);
                     i++;
-                    console.log("i:" + i);
+                    console.log("Trying to find: '" + elSelector + "' " + i + "/" + tickCycleTimeout + " @ " + tickSpeed + "ms Time Left: " + ((tickSpeed * i) / 1000) + "/" + ((tickSpeed * tickCycleTimeout) / 1000));
                 })(this), tickSpeed);
             }
         };
