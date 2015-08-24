@@ -6,8 +6,7 @@
 //import AutoPlaceholer = require("typescript/AutoPlaceholder");
 
 $( ()=> {
-    // Enable all the Bootstrap Switches
-    $(".bsSwitch").bootstrapSwitch();
+
     console.log("LikeAG5 Initialized");
 
     var hooks = new LikeAG5.Hooks();

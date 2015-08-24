@@ -10,19 +10,7 @@
 
 	<link href="css/libraries/bootstrap-3.3.4/bootstrap.min.css" rel="stylesheet">
 	<link href="css/libraries/bootstrap-switch-3.3.2/bootstrap-switch.min.css" rel="stylesheet">
-	<link href="css/base.css" rel="stylesheet">
-
-	<!--
-	  - JavaScript and HTML must be in separate files: see our Content Security
-	  - Policy documentation[1] for details and explanation.
-	  -
-	  - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
-	 -->
-	<script src="js/libraries/jquery-2.1.4/jquery-2.1.4.min.js"></script>
-	<script src="js/libraries/bootstrap-3.3.4/bootstrap.min.js"></script>
-	<script src="js/libraries/bootstrap-switch-3.3.2/bootstrap-switch.min.js"></script>
-	<script src="js/typescript/AutoPlaceholder.js"></script>
-	<script src="js/main.js"></script>
+	<link href="css/popup.css" rel="stylesheet">
 </head>
 <body>
 <header class="container">
@@ -30,7 +18,27 @@
 </header>
 
 <main class="container">
-	<!-- Auto Place Holder -->
+
+	<div class="row">
+		<div class="col-sm-6">
+			<div id="exportModalForm" class="tool">
+				<h3>
+					<span class="glyphicon glyphicon-export" aria-hidden="true"></span>
+					Export Modal Form
+				</h3>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div id="importModalForm" class="tool">
+				<h3>
+					<span class="glyphicon glyphicon-export" aria-hidden="true"></span>
+					Import Modal Form
+				</h3>
+			</div>
+		</div>
+	</div>
+
+	<!-- Auto Place Holder
 	<div class="feature">
 		<input class="bsSwitch" id="autoPlaceholder" type="checkbox"
 			   data-on-color="success"
@@ -42,9 +50,9 @@
 			variable placeholder (placeholder starts with '{{').
 			Clicking the AutoPlace button will pull the placeholder in to the text input field.
 			This helps prevent typos and saves time.</p>
-	</div>
+	</div> -->
 
-	<!-- Vertical Widget Sort -->
+	<!-- Vertical Widget Sort
 	<div class="feature">
 		<input class="bsSwitch" id="verticalWidgetSort" type="checkbox"
 			   data-on-color="success"
@@ -55,9 +63,9 @@
 		<p id="collapseVerticalWidgetSort" class="collapse">Sorts the widgets into vertical columns. There is a slight
 			bug/glitch in rendering/hovering. Sometimes you have to hover the first column to bring visibility back to
 			a hidden element that disappears after leaving the hover state.</p>
-	</div>
+	</div>-->
 
-	<!-- Viewport Height Fix -->
+	<!-- Viewport Height Fix
 	<div class="feature">
 		<input class="bsSwitch" id="viewportHeightFix" type="checkbox"
 			   data-on-color="success"
@@ -67,9 +75,9 @@
 		<span class="description" data-toggle="collapse" data-target="#collapseViewportHeightFix">Description</span>
 		<p id="collapseViewportHeightFix" class="collapse">Makes the viewport for the preview the same height as the
 			parent window.</p>
-	</div>
+	</div>-->
 
-	<!-- State Placeholder -->
+	<!-- State Placeholder
 	<div class="feature">
 		<input class="bsSwitch" id="statePlaceholder" type="checkbox"
 			   data-on-color="success"
@@ -79,7 +87,7 @@
 		<span class="description" data-toggle="collapse" data-target="#collapsestatePlaceholder">Description</span>
 		<p id="collapsestatePlaceholder" class="collapse">Adds a placeholder {{location_state}} option for state
 			selector drop-downs. This currently works but may break in the future or have unintended outcomes.</p>
-	</div>
+	</div>-->
 </main>
 
 <footer class="container">
@@ -103,9 +111,21 @@
 		</div>
 		<div class="col-sm-6">
 			<h4>Created by: Cody Swartz</h4>
-			<p>All copyrights belong to their respective owners.</p>
+			<p>All copyrights and trademarks belong to their respective owners.</p>
 		</div>
 	</div>
 </footer>
+
+<!--
+	  - JavaScript and HTML must be in separate files: see our Content Security
+	  - Policy documentation[1] for details and explanation.
+	  -
+	  - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
+	 -->
+<script src="js/libraries/jquery-2.1.4/jquery-2.1.4.min.js"></script>
+<script src="js/libraries/bootstrap-3.3.4/bootstrap.min.js"></script>
+<script src="js/libraries/bootstrap-switch-3.3.2/bootstrap-switch.min.js"></script>
+<script src="js/popup.js"></script>
+
 </body>
 </html>
