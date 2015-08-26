@@ -7,6 +7,7 @@ $(function () {
     console.log("LikeAG5 Initialized");
     var hooks = new LikeAG5.Hooks();
     var autoPlaceholder = new LikeAG5.AutoPlaceholder;
-    autoPlaceholder.inject(hooks);
+    // crashes chrome currently
+    //autoPlaceholder.inject(hooks);
 });
 //# sourceMappingURL=main.js.map

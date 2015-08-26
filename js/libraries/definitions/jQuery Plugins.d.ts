@@ -1,4 +1,4 @@
 // Jquery Plugins
 interface JQuery {
-    bootstrapSwitch: any;
+	bootstrapSwitch: any;
 }
