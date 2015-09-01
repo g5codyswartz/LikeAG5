@@ -40,14 +40,14 @@
 				"js/main.js"
 			]
 		}
-	]/*,
+	],
 	"background": {
 		"scripts": [
 			"js/libraries/jquery-2.1.4/jquery-2.1.4.min.js",
 			"js/typescript/AutoPlaceholder.js",
 			"js/typescript/Hooks.js",
-			"js/main.js"
+			"js/background.js"
 		],
-		"persistent": false
-	}*/
+		"persistent": true
+	}
 }

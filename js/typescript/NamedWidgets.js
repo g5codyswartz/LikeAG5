@@ -1,6 +1,6 @@
 /// <reference path="../libraries/definitions/jquery.d.ts" />
 /// <reference path="./MultidimensionalStorage.ts" />
-var __extends = this.__extends || function (d, b) {
+var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
@@ -110,7 +110,18 @@ var LikeAG5;
                 LikeAG5.MultidimensionalStorage.setObj('options.namedWidgets.autoName', bool);
             }
             function addCSS() {
-                $("<style> .btnRename {" + "padding: 0px 2px;" + "background-color: #222;" + "color: white;" + "border: 0px solid #222;" + "border-radius: 4px;" + "width: 20px;" + "height: 18px;" + "letter-spacing: 1px;" + "font-weight: bold;" + "padding-left: 3px;" + "} </style>").appendTo("head");
+                $("<style> .btnRename {" +
+                    "padding: 0px 2px;" +
+                    "background-color: #222;" +
+                    "color: white;" +
+                    "border: 0px solid #222;" +
+                    "border-radius: 4px;" +
+                    "width: 20px;" +
+                    "height: 18px;" +
+                    "letter-spacing: 1px;" +
+                    "font-weight: bold;" +
+                    "padding-left: 3px;" +
+                    "} </style>").appendTo("head");
             }
             /* todo Ideas
              If the same client, ask if you want to load up another location - for locations
