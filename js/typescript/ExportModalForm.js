@@ -24,7 +24,7 @@ var LikeAG5;
             copy(JSON.stringify(dump));
         };
         return ExportModalForm;
-    })();
+    }());
     LikeAG5.ExportModalForm = ExportModalForm;
 })(LikeAG5 || (LikeAG5 = {}));
 //# sourceMappingURL=ExportModalForm.js.map

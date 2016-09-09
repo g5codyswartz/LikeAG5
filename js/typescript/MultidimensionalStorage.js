@@ -115,7 +115,7 @@ var LikeAG5;
             return this.__walker(keySplit, o);
         };
         return MultidimensionalStorage;
-    })();
+    }());
     LikeAG5.MultidimensionalStorage = MultidimensionalStorage;
 })(LikeAG5 || (LikeAG5 = {}));
 //# sourceMappingURL=MultidimensionalStorage.js.map

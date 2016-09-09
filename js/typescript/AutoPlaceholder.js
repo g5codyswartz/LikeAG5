@@ -55,7 +55,7 @@ var LikeAG5;
             });
         };
         return AutoPlaceholder;
-    })();
+    }());
     LikeAG5.AutoPlaceholder = AutoPlaceholder;
 })(LikeAG5 || (LikeAG5 = {}));
 //# sourceMappingURL=AutoPlaceholder.js.map
