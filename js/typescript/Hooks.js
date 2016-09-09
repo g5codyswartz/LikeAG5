@@ -53,34 +53,33 @@ var LikeAG5;
             return true;
         };
         // 120 ticks @ 250ms = 30 seconds
-        Hooks.prototype.findElement = function (elSelector, callback, tickSpeed, tickCycleTimeout) {
+        Hooks.prototype.findElement = function (elSelector, callback, tickSpeed, tickCycleTimeout, i) {
+            // Lol this was creating a self executing function that ignored the timer, thus killing the tab
             // Pass this to anon functions: http://thomasdavis.github.io/tutorial/anonymous-functions.html
-            if (tickSpeed === void 0) { tickSpeed = 250; }
-            if (tickCycleTimeout === void 0) { tickCycleTimeout = 120; }
+            if (tickSpeed === void 0) { tickSpeed = 500; }
+            if (tickCycleTimeout === void 0) { tickCycleTimeout = 10; }
+            if (i === void 0) { i = 0; }
             var select = $(elSelector);
-            console.log(select);
-            console.log(select.length);
-            var i = 0;
-            // maybe a while: not found and under tick
-            // nevermind that breaks the recurring calling + delay
-            if (select.length) {
-                console.log("FOUND! :D");
-                callback();
+            if (select.length > 0) {
+                console.log("FOUND! :D", select);
+                callback(select);
             }
-            else {
+            else if (i < tickCycleTimeout) {
+                i++;
                 console.log("NOT FOUND :(");
-                setTimeout((function (scope) {
-                    if (i < tickCycleTimeout)
-                        scope.findElement(elSelector, callback, tickSpeed, tickCycleTimeout);
-                    i++;
+                setTimeout(function () {
                     console.log("Trying to find: '" + elSelector + "' " + i + "/" + tickCycleTimeout + " @ " + tickSpeed +
                         "ms Time Left: " + ((tickSpeed * i) / 1000) + "/" + ((tickSpeed * tickCycleTimeout) / 1000));
-                })(this), tickSpeed);
+                    this.findElement(elSelector, callback, tickSpeed, tickCycleTimeout, i);
+                }.bind(this), tickSpeed);
+            }
+            else {
+                console.log("GAVE UP, NEVER FOUND");
             }
         };
         Hooks.observerConfig = { attributes: true, childList: true, characterData: true };
         return Hooks;
-    })();
+    }());
     LikeAG5.Hooks = Hooks;
 })(LikeAG5 || (LikeAG5 = {}));
 //# sourceMappingURL=Hooks.js.map

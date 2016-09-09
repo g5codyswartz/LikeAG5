@@ -74,35 +74,36 @@ module LikeAG5 {
         }
 
 	    // 120 ticks @ 250ms = 30 seconds
-        public findElement(elSelector: string, callback: ()=>any, tickSpeed = 250, tickCycleTimeout = 120) {
+        public findElement(elSelector: string, callback: (el)=>any, tickSpeed = 500, tickCycleTimeout = 10, i = 0) {
 
+            // Lol this was creating a self executing function that ignored the timer, thus killing the tab
 	        // Pass this to anon functions: http://thomasdavis.github.io/tutorial/anonymous-functions.html
 
             var select = $(elSelector);
-            console.log(select);
-            console.log(select.length);
-	        var i = 0;
 
-	        // maybe a while: not found and under tick
-	        // nevermind that breaks the recurring calling + delay
-
-            if (select.length)
+            if (select.length > 0)
             {
-                console.log("FOUND! :D");
-                callback();
+                console.log("FOUND! :D", select);
+                callback(select);
             }
-            else
+            else if (i < tickCycleTimeout)
             {
+                i++;
+
                 console.log("NOT FOUND :(");
-                setTimeout((function(scope) {
 
-	                if (i < tickCycleTimeout)
-	                    scope.findElement(elSelector, callback, tickSpeed, tickCycleTimeout);
-	                i++;
-	                console.log("Trying to find: '"+elSelector+"' "+i+"/"+tickCycleTimeout+" @ "+tickSpeed+
-	                    "ms Time Left: "+((tickSpeed*i) / 1000)+"/"+((tickSpeed*tickCycleTimeout)/1000));
+                setTimeout(function() {
 
-                })(this), tickSpeed);
+                    console.log("Trying to find: '"+elSelector+"' "+i+"/"+tickCycleTimeout+" @ "+tickSpeed+
+                        "ms Time Left: "+((tickSpeed*i) / 1000)+"/"+((tickSpeed*tickCycleTimeout)/1000));
+
+                    this.findElement(elSelector, callback, tickSpeed, tickCycleTimeout, i);
+
+
+                }.bind(this), tickSpeed);
+            }
+            else {
+                console.log("GAVE UP, NEVER FOUND");
             }
         }
 
