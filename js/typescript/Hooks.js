@@ -24,9 +24,9 @@ var LikeAG5;
         };
         Hooks.prototype.removeObserver = function () {
             /* todo
-                Find out if we can just overwrite the observers target with an empty function,
-                if we can add multiple callbacks.
-                Or if we need to disconnect the observers, clean our cache, and then reinitialize our observers
+             Find out if we can just overwrite the observers target with an empty function,
+             if we can add multiple callbacks.
+             Or if we need to disconnect the observers, clean our cache, and then reinitialize our observers
              */
         };
         Hooks.prototype.setjQueryBind = function (elSelector, eventName, callback) {
@@ -76,6 +76,16 @@ var LikeAG5;
             else {
                 console.log("GAVE UP, NEVER FOUND");
             }
+        };
+        Hooks.prototype.cmsPreviewReady = function (callback) {
+            this.findElement('.builder iframe.ember-view', function (e) {
+                console.log("Preview iframe Found", e);
+                e.load(function () {
+                    console.log("Iframe DOM Ready");
+                    //console.log(e, e.contents(), $(".row", e.contents()));
+                    callback(e);
+                });
+            });
         };
         Hooks.observerConfig = { attributes: true, childList: true, characterData: true };
         return Hooks;

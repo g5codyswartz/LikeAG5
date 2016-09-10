@@ -9,23 +9,13 @@ module LikeAG5 {
 
             console.log("Edit Row Injected");
 
-            hooks.findElement('.builder iframe.ember-view', (e)=>{
-                console.log("FOUND IFRAME", e);
-
-                e.load(()=>{
-                    console.log("Iframe DOM Ready");
-
-                    console.log(e, e.contents(), $(".row", e.contents()));
-
-                    $(".row", e.contents()).each((i,e)=>{
-                        let el = $(e);
-                        let dataId = $(el).data("id");
-                        el.append(`<span>${dataId}</span>`);
-                    });
+            hooks.cmsPreviewReady((e)=>{
+                $(".row", e.contents()).each((i,e)=>{
+                    let el = $(e);
+                    let dataId = $(el).data("id");
+                    el.append(`<span>${dataId}</span>`);
                 });
-
             });
-
         }
     }
 }
