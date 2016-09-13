@@ -38,7 +38,7 @@
 				"js/typescript/AutoPlaceholder.js",
 				"js/plugins/EditRow.js",
 				"js/typescript/Hooks.js",
-				"js/main.js"
+				"js/main/main.js"
 			]
 		}
 	],
@@ -47,7 +47,7 @@
 			"js/libraries/jquery-2.1.4/jquery-2.1.4.min.js",
 			"js/typescript/AutoPlaceholder.js",
 			"js/typescript/Hooks.js",
-			"js/background.js"
+			"js/main/background.js"
 		],
 		"persistent": true
 	}

@@ -1,0 +1,23 @@
+{
+  "name": "like-a-g5",
+  "version": "1.0.0",
+  "description": "Chrome extension for the G5 platform to provide additional injected functionality.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/g5codyswartz/LikeAG5.git"
+  },
+  "author": "Cody Swartz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/g5codyswartz/LikeAG5/issues"
+  },
+  "homepage": "https://github.com/g5codyswartz/LikeAG5#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-typescript": "^2.13.6"
+  }
+}

@@ -1,6 +1,6 @@
-/// <reference path="libraries/definitions/jquery.d.ts" />
-/// <reference path="libraries/definitions/jQuery Plugins.d.ts" />
-/// <reference path="libraries/definitions/chrome.d.ts" />
+/// <reference path="../libraries/definitions/jquery.d.ts" />
+/// <reference path="../libraries/definitions/jQuery Plugins.d.ts" />
+/// <reference path="../libraries/definitions/chrome.d.ts" />
 
 $( ()=> {
 
