@@ -18,6 +18,7 @@
   "homepage": "https://github.com/g5codyswartz/LikeAG5#readme",
   "devDependencies": {
     "gulp": "^3.9.1",
-    "gulp-typescript": "^2.13.6"
+    "gulp-typescript": "^3.1.4",
+    "typescript": "^2.1.5"
   }
 }
