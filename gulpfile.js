@@ -43,7 +43,7 @@ gulp.task("less", function () {
 
 gulp.task("copy", function () {
   return gulp.src([
-    `${src}/{fonts,images}/**/*`,
+    `${src}/{fonts,images,js/libraries}/**/*`,
     `${src}/*.html`,
     `${src}/manifest.json`
   ])

@@ -35,20 +35,19 @@
 			"js": [
 				"js/libraries/jquery-2.1.4/jquery-2.1.4.min.js",
 				"js/libraries/bootstrap-switch-3.3.2/bootstrap-switch.min.js",
-				"js/typescript/AutoPlaceholder.js",
-				"js/plugins/EditRow.js",
-				"js/typescript/Hooks.js",
-				"dist/main.js"
-				//"js/main/main.js"
+				//"js/typescript/AutoPlaceholder.js",
+				//"js/plugins/EditRow.js",
+				//"js/typescript/Hooks.js",
+				"js/main.js"
 			]
 		}
 	],
 	"background": {
 		"scripts": [
 			"js/libraries/jquery-2.1.4/jquery-2.1.4.min.js",
-			"js/typescript/AutoPlaceholder.js",
-			"js/typescript/Hooks.js",
-			"js/main/background.js"
+			//"js/typescript/AutoPlaceholder.js",
+			//"js/typescript/Hooks.js",
+			"js/background.js"
 		],
 		"persistent": true
 	}
