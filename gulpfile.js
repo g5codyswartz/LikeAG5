@@ -19,7 +19,7 @@ var src = "./src";
 // Cleanup and then build (in parallel)
 gulp.task("default", gulpSequence("cleanup", ["typescript", "less", "copy"]));
 
-gulp.task("cleanup", function() {
+gulp.task("cleanup", function () {
   return del(`${dest}`);
 });
 
@@ -44,16 +44,8 @@ gulp.task("less", function () {
 gulp.task("copy", function () {
   return gulp.src([
     `${src}/{fonts,images}/**/*`,
-    `${src}/*.html`
+    `${src}/*.html`,
+    `${src}/manifest.json`
   ])
     .pipe(gulp.dest(`${dest}`));
-});
-
-gulp.task("images", function () {
-  return gulp.src(`${src}/images/**/*`)
-    .pipe(gulp.dest(`${dest}/fonts`));
-});
-
-gulp.task("html", function () {
-
 });
