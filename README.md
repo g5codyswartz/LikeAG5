@@ -5,6 +5,11 @@ Working to port these bookmarklets I've written: http://codepen.io/G5codyswartz/
 
 This way the latest features can be auto-loaded without effort, instead of requiring user intervention, manual updates, and additions.
 
+### Building
+Run `gulp` which will create a `dist` folder with the build. 
+You can then go into Chrome's extensions `chrome://extensions/` 
+and `Load unpacked extension...` and select the dist folder. 
+
 ### Resources
 - [Template Literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals)
 
