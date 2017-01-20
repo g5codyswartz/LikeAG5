@@ -21,6 +21,7 @@
     "eslint": "^3.13.1",
     "eslint-config-google": "^0.7.1",
     "gulp": "^3.9.1",
+    "gulp-sourcemaps": "^2.4.0",
     "gulp-typescript": "^3.1.4",
     "tsify": "^3.0.0",
     "typescript": "^2.1.5",
