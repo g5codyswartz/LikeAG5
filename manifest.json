@@ -38,7 +38,8 @@
 				"js/typescript/AutoPlaceholder.js",
 				"js/plugins/EditRow.js",
 				"js/typescript/Hooks.js",
-				"js/main/main.js"
+				"dist/main.js"
+				//"js/main/main.js"
 			]
 		}
 	],
