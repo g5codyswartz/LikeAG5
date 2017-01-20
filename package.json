@@ -18,10 +18,12 @@
   "homepage": "https://github.com/g5codyswartz/LikeAG5#readme",
   "devDependencies": {
     "browserify": "^13.3.0",
+    "del": "^2.2.2",
     "eslint": "^3.13.1",
     "eslint-config-google": "^0.7.1",
     "gulp": "^3.9.1",
     "gulp-less": "^3.3.0",
+    "gulp-sequence": "^0.4.6",
     "gulp-sourcemaps": "^2.4.0",
     "gulp-typescript": "^3.1.4",
     "tsify": "^3.0.0",
