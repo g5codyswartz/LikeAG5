@@ -1,6 +1,3 @@
-/// <reference path="../libraries/definitions/jquery.d.ts" />
-/// <reference path="../typescript/i_Injectable.ts" />
-/// <reference path="../typescript/Hooks.ts" />
 
 module LikeAG5 {
     export class EditRow implements Injectable {

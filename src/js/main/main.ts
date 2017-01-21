@@ -1,22 +1,16 @@
-/// <reference path="../libraries/definitions/jquery.d.ts" />
-/// <reference path="../libraries/definitions/jQuery Plugins.d.ts" />
-/// <reference path="../typescript/AutoPlaceholder.ts" />
-/// <reference path="../typescript/NamedWidgets.ts" />
-/// <reference path="../plugins/EditRow.ts" />
-/// <reference path="../libraries/definitions/chrome.d.ts" />
 
-//import AutoPlaceholer = require("typescript/AutoPlaceholder");
+import { sayHello } from "../plugins/Greet";
 
-$( ()=> {
+$(() => {
 
-    console.log("LikeAG5 Initialized");
-
-    //var hooks = new LikeAG5.Hooks();
-    //var autoPlaceholder = new LikeAG5.AutoPlaceholder;
+	console.log("LikeAG5 Initialized");
+	console.log(sayHello("AYeeee"));
+	//var hooks = new LikeAG5.Hooks();
+	//var autoPlaceholder = new LikeAG5.AutoPlaceholder;
 	//var editRow = new LikeAG5.EditRow;
 
 	// crashes chrome currently
-    //autoPlaceholder.inject(hooks);
+	//autoPlaceholder.inject(hooks);
 	//editRow.inject(hooks);
 
 	/*var port = chrome.runtime.connect({name: "LikeAG5"});

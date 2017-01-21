@@ -1,7 +1,3 @@
-/// <reference path="../libraries/definitions/jquery.d.ts" />
-/// <reference path="./i_Injectable.ts" />
-/// <reference path="./MultidimensionalStorage.ts" />
-/// <reference path="./Hooks.ts" />
 
 module LikeAG5 {
 	export class AutoPlaceholder implements Injectable {

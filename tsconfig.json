@@ -2,7 +2,8 @@
     "files": [
         "./src/js/main/main.ts",
         "./src/js/main/background.ts",
-        "./src/js/main/popup.ts"
+        "./src/js/main/popup.ts",
+        "./src/js/plugins/Greet.ts"
     ],
     "compilerOptions": {
         "noImplicitAny": true,

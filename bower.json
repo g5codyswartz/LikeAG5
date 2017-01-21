@@ -1,0 +1,22 @@
+{
+  "name": "like-a-g5",
+  "description": "Chrome extension for the G5 platform to provide additional injected functionality.",
+  "main": "src/js/main/main.ts",
+  "authors": [
+    "Cody Swartz"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/g5codyswartz/LikeAG5",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "materialize": "^0.97.8"
+  }
+}

@@ -1,5 +1,3 @@
-/// <reference path="../libraries/definitions/jquery.d.ts" />
-/// <reference path="./MultidimensionalStorage.ts" />
 
 module LikeAG5 {
     export class NamedWidgets extends MultidimensionalStorage {

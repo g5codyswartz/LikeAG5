@@ -1,4 +1,3 @@
-/// <reference path="../libraries/definitions/jquery.d.ts" />
 
 module LikeAG5 {
 

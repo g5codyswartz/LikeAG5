@@ -2,7 +2,7 @@
   "name": "like-a-g5",
   "version": "1.0.0",
   "description": "Chrome extension for the G5 platform to provide additional injected functionality.",
-  "main": "main.js",
+  "main": "src/js/main/main.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/g5codyswartz/LikeAG5#readme",
   "devDependencies": {
+    "@types/bootstrap-switch": "0.0.30",
+    "@types/chrome": "0.0.38",
+    "@types/jquery": "^2.0.39",
+    "bower": "^1.8.0",
     "browserify": "^13.3.0",
     "del": "^2.2.2",
     "eslint": "^3.13.1",
@@ -26,6 +30,7 @@
     "gulp-sequence": "^0.4.6",
     "gulp-sourcemaps": "^2.4.0",
     "gulp-typescript": "^3.1.4",
+    "main-bower-files": "^2.13.1",
     "tsify": "^3.0.0",
     "typescript": "^2.1.5",
     "vinyl-source-stream": "^1.1.0"
