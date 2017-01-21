@@ -27,8 +27,9 @@ gulp.task("cleanup", function () {
   return del(`${dest}`);
 });
 
-gulp.task("typescript", function () {
-  /*
+gulp.task("typescript", ["typescript-main", "typescript-popup", "typescript-background"]);
+
+gulp.task("typescript-main", function () {
   return browserify({
     basedir: ".",
     debug: true,
@@ -38,18 +39,36 @@ gulp.task("typescript", function () {
   })
     .plugin(tsify)
     .bundle()
-    .pipe(source("bundle.js"))
-    .pipe(gulp.dest(dest));
-*/
-
-  var tsResult = tsProject.src()
-    .pipe(sourcemaps.init())
-    .pipe(tsProject());
-
-  return tsResult.js
-    .pipe(sourcemaps.write())
+    .pipe(source("main.js"))
     .pipe(gulp.dest(`${dest}/js`));
-    
+});
+
+gulp.task("typescript-popup", function () {
+  return browserify({
+    basedir: ".",
+    debug: true,
+    entries: [`${src}/js/main/popup.ts`],
+    cache: {},
+    packageCache: {}
+  })
+    .plugin(tsify)
+    .bundle()
+    .pipe(source("popup.js"))
+    .pipe(gulp.dest(`${dest}/js`));
+});
+
+gulp.task("typescript-background", function () {
+  return browserify({
+    basedir: ".",
+    debug: true,
+    entries: [`${src}/js/main/background.ts`],
+    cache: {},
+    packageCache: {}
+  })
+    .plugin(tsify)
+    .bundle()
+    .pipe(source("background.js"))
+    .pipe(gulp.dest(`${dest}/js`));
 });
 
 gulp.task("less", function () {
