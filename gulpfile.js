@@ -5,18 +5,23 @@
  * http://stackoverflow.com/questions/25038014/how-do-i-copy-directories-recursively-with-gulp
  * http://stackoverflow.com/questions/27671390/why-inline-source-maps
  * http://andy-carter.com/blog/a-beginners-guide-to-package-manager-bower-and-using-gulp-to-manage-components
+ * https://fettblog.eu/gulp-browserify-multiple-bundles/
  */
 
 var gulp = require("gulp");
 var gulpSequence = require("gulp-sequence");
+var rename = require("gulp-rename");
 var del = require("del");
+var path = require("path");
+var es = require("event-stream");
+var glob = require("glob");
 var browserify = require("browserify");
+var watchify = require("watchify");
 var source = require("vinyl-source-stream");
 var tsify = require("tsify");
-var ts = require("gulp-typescript");
-var tsProject = ts.createProject("tsconfig.json");
 var less = require("gulp-less");
 var sourcemaps = require("gulp-sourcemaps");
+
 var dest = "./dist";
 var src = "./src";
 
@@ -27,48 +32,31 @@ gulp.task("cleanup", function () {
   return del(`${dest}`);
 });
 
-gulp.task("typescript", ["typescript-main", "typescript-popup", "typescript-background"]);
+gulp.task("typescript", function (done) {
+  glob(`${src}/js/main/{main,popup,background}.ts`, function (err, files) {
+    if (err) done(err);
 
-gulp.task("typescript-main", function () {
-  return browserify({
-    basedir: ".",
-    debug: true,
-    entries: [`${src}/js/main/main.ts`],
-    cache: {},
-    packageCache: {}
-  })
-    .plugin(tsify)
-    .bundle()
-    .pipe(source("main.js"))
-    .pipe(gulp.dest(`${dest}/js`));
-});
+    var tasks = files.map(function (entry) {
+      //console.log("ENTRY", entry);
+      var filename = path.basename(entry);
+      return browserify({
+        basedir: ".",
+        debug: true,
+        entries: [entry],
+        cache: {},
+        packageCache: {}
+      })
+        .plugin(tsify)
+        .bundle()
+        .pipe(source(filename))
+        .pipe(rename({
+          extname: ".js"
+        }))
+        .pipe(gulp.dest(`${dest}/js`));
+    });
 
-gulp.task("typescript-popup", function () {
-  return browserify({
-    basedir: ".",
-    debug: true,
-    entries: [`${src}/js/main/popup.ts`],
-    cache: {},
-    packageCache: {}
-  })
-    .plugin(tsify)
-    .bundle()
-    .pipe(source("popup.js"))
-    .pipe(gulp.dest(`${dest}/js`));
-});
-
-gulp.task("typescript-background", function () {
-  return browserify({
-    basedir: ".",
-    debug: true,
-    entries: [`${src}/js/main/background.ts`],
-    cache: {},
-    packageCache: {}
-  })
-    .plugin(tsify)
-    .bundle()
-    .pipe(source("background.js"))
-    .pipe(gulp.dest(`${dest}/js`));
+    es.merge(tasks).on("end", done);
+  });
 });
 
 gulp.task("less", function () {
