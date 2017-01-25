@@ -9,4 +9,6 @@
     //"**/*.js.map": { "when": "$(basename)" },
     //"**/*.css": { "when": "$(basename).less" }
   }
+,
+"vsicons.presets.angular": true
 }

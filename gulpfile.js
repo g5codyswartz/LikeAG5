@@ -18,7 +18,9 @@ var glob = require("glob");
 var browserify = require("browserify");
 var watchify = require("watchify");
 var source = require("vinyl-source-stream");
+var buffer = require("vinyl-buffer");
 var tsify = require("tsify");
+var uglify = require("gulp-uglify");
 var less = require("gulp-less");
 var sourcemaps = require("gulp-sourcemaps");
 
@@ -49,9 +51,13 @@ gulp.task("typescript", function (done) {
         .plugin(tsify)
         .bundle()
         .pipe(source(filename))
+        .pipe(buffer())
+        .pipe(sourcemaps.init({ loadMaps: true }))
+        .pipe(uglify())
         .pipe(rename({
           extname: ".js"
         }))
+        .pipe(sourcemaps.write("./"))
         .pipe(gulp.dest(`${dest}/js`));
     });
 
@@ -63,7 +69,7 @@ gulp.task("less", function () {
   return gulp.src(`${src}/less/*.less`)
     .pipe(sourcemaps.init())
     .pipe(less())
-    .pipe(sourcemaps.write())
+    .pipe(sourcemaps.write("./"))
     .pipe(gulp.dest(`${dest}/css`));
 });
 
