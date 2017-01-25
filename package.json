@@ -27,6 +27,8 @@
     "eslint-config-google": "^0.7.1",
     "event-stream": "^3.3.4",
     "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-filter": "^5.0.0",
     "gulp-less": "^3.3.0",
     "gulp-rename": "^1.2.2",
     "gulp-sequence": "^0.4.6",

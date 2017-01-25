@@ -16,19 +16,23 @@ var path = require("path");
 var es = require("event-stream");
 var glob = require("glob");
 var browserify = require("browserify");
-var watchify = require("watchify");
 var source = require("vinyl-source-stream");
 var buffer = require("vinyl-buffer");
 var tsify = require("tsify");
 var uglify = require("gulp-uglify");
 var less = require("gulp-less");
 var sourcemaps = require("gulp-sourcemaps");
+var mainBowerFiles = require("main-bower-files");
+// Unused so far, but useful
+var watchify = require("watchify"); // live reload could be an altenative
+var filter = require("gulp-filter");
+var concat = require("gulp-concat");
 
 var dest = "./dist";
 var src = "./src";
 
 // Cleanup and then build (in parallel)
-gulp.task("default", gulpSequence("cleanup", ["typescript", "less", "copy"]));
+gulp.task("default", gulpSequence("cleanup", ["typescript", "less", "copy", "bower-js", "bower-css"]));
 
 gulp.task("cleanup", function () {
   return del(`${dest}`);
@@ -80,4 +84,21 @@ gulp.task("copy", function () {
     `${src}/manifest.json`
   ])
     .pipe(gulp.dest(`${dest}`));
+});
+
+
+gulp.task("bower-js", function () {
+  gulp.src(mainBowerFiles("**/*.js"))
+    //.pipe(filter("**/*.js"))
+    // doubles build time, no real reason for an extension
+    //.pipe(sourcemaps.init())
+    //.pipe(concat("test.js"))
+    //.pipe(uglify())
+    //.pipe(sourcemaps.write("./"))
+    .pipe(gulp.dest(`${dest}/js/libs`));
+});
+
+gulp.task("bower-css", function () {
+  gulp.src(mainBowerFiles("**/*.css"))
+    .pipe(gulp.dest(`${dest}/css/libs`));
 });
