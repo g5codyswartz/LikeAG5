@@ -18,5 +18,14 @@
   "dependencies": {
     "jquery": "^3.1.1",
     "materialize": "^0.97.8"
+  },
+  "overrides": {
+    "materialize": {
+      "main": [
+        "./dist/js/materialize.js",
+        "./dist/css/materialize.css",
+        "./dist/fonts/*/**"
+      ]
+    }
   }
 }

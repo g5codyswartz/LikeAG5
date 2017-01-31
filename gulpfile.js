@@ -103,22 +103,23 @@ gulp.task("copy", function () {
 
 
 gulp.task("bower-js", function () {
-  gulp.src(mainBowerFiles("**/*.js"))
+  return gulp.src(mainBowerFiles("**/*.js"))
     //.pipe(filter("**/*.js"))
     // doubles build time, no real reason for an extension
     //.pipe(sourcemaps.init())
-    //.pipe(concat("test.js"))
+    .pipe(concat("vendor.js"))
     //.pipe(uglify())
     //.pipe(sourcemaps.write("./"))
-    .pipe(gulp.dest(`${dest}/js/libs`));
+    .pipe(gulp.dest(`${dest}/js`));
 });
 
 gulp.task("bower-css", function () {
   gulp.src(mainBowerFiles("**/*.css"))
-    .pipe(gulp.dest(`${dest}/css/libs`));
+    .pipe(concat("vendor.css"))
+    .pipe(gulp.dest(`${dest}/css`));
 });
 
 gulp.task("bower-fonts", function() {
-  gulp.src(`${bowerDir}/materialize/dist/fonts/*/**`)
+  return gulp.src(mainBowerFiles("**/fonts/**/*"))
   .pipe(gulp.dest(`${dest}/fonts`));
 });
