@@ -10,5 +10,5 @@
     //"**/*.css": { "when": "$(basename).less" }
   }
 ,
-"vsicons.presets.angular": true
+"vsicons.presets.angular": false
 }
