@@ -1,6 +1,9 @@
 
 $(() => {
 
+	// Initialize materialize nav
+	$(".button-collapse").sideNav();
+
 	console.log("LikeAG5 Popup Initialized");
 
 	// Events

@@ -33,14 +33,14 @@
 			"matches": ["*://*.herokuapp.com/*", "*://*.g5dns.com/*", "*://*.g5dxm.com/*"],
 			//"css": ["mystyles.css"],
 			"js": [
-				"js/libs/jquery.js",
+				"js/vendor.js",
 				"js/main.js"
 			]
 		}
 	],
 	"background": {
 		"scripts": [
-			"js/libs/jquery.js",
+			"js/vendor.js",
 			"js/background.js"
 		],
 		"persistent": true
