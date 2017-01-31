@@ -85,7 +85,7 @@ gulp.task("typescript", function (done) {
 });
 
 gulp.task("less", function () {
-  return gulp.src(`${src}/less/*.less`)
+  return gulp.src([`${src}/less/*.less`, `${src}/less/includes/base.less`])
     .pipe(sourcemaps.init())
     .pipe(less())
     .pipe(sourcemaps.write("./"))
