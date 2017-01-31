@@ -119,7 +119,15 @@ gulp.task("bower-css", function () {
     .pipe(gulp.dest(`${dest}/css`));
 });
 
-gulp.task("bower-fonts", function() {
+gulp.task("bower-fonts", function () {
   return gulp.src(mainBowerFiles("**/fonts/**/*"))
-  .pipe(gulp.dest(`${dest}/fonts`));
+    .pipe(gulp.dest(`${dest}/fonts`));
+});
+
+gulp.task("watch", function () {
+  gulp.watch([
+    `${src}/{fonts,images,js/libraries}/**/*`,
+    `${src}/*.html`,
+    `${src}/manifest.json`
+  ], ["copy"]);
 });
