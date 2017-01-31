@@ -12,6 +12,7 @@ and `Load unpacked extension...` and select the dist folder.
 
 ### Resources
 - [Template Literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals)
+- [Thinking about building this in ember](http://stackoverflow.com/questions/31058879/how-to-configure-ember-routes-in-a-chrome-extension)
 
 #### Promises
 

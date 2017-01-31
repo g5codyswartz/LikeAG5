@@ -3,9 +3,6 @@ $(() => {
 
 	console.log("LikeAG5 Popup Initialized");
 
-	// Enable all the Bootstrap Switches
-	$(".bsSwitch").bootstrapSwitch();
-
 	// Events
 	/*$('exportModalForm').click(function(){
 		console.log("TESTING");

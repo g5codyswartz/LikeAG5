@@ -13,6 +13,7 @@ var gulpSequence = require("gulp-sequence");
 var rename = require("gulp-rename");
 var del = require("del");
 var path = require("path");
+var exists = require("path-exists").sync;
 var es = require("event-stream");
 var glob = require("glob");
 var browserify = require("browserify");
@@ -30,9 +31,23 @@ var concat = require("gulp-concat");
 
 var dest = "./dist";
 var src = "./src";
+var bowerDir = "./bower_components";
+
+/** 
+ * http://stackoverflow.com/questions/27100383/how-to-select-minified-dependencies-with-gulp-and-main-bower-files
+ * https://gist.github.com/vincent-zurczak/424c5d136063c120ee18
+ * Maybe include maps if they exist and then flatten this
+ * Or just bundle them into vendors and do my own mapping and minifying #TODO
+*/
+var getMinFiles = (arr) => {
+  return arr.map(function (path, index, arr) {
+    var newPath = path.replace(/.([^.]+)$/g, ".min.$1");
+    return exists(newPath) ? newPath : path;
+  });
+};
 
 // Cleanup and then build (in parallel)
-gulp.task("default", gulpSequence("cleanup", ["typescript", "less", "copy", "bower-js", "bower-css"]));
+gulp.task("default", gulpSequence("cleanup", ["typescript", "less", "copy", "bower-js", "bower-css", "bower-fonts"]));
 
 gulp.task("cleanup", function () {
   return del(`${dest}`);
@@ -101,4 +116,9 @@ gulp.task("bower-js", function () {
 gulp.task("bower-css", function () {
   gulp.src(mainBowerFiles("**/*.css"))
     .pipe(gulp.dest(`${dest}/css/libs`));
+});
+
+gulp.task("bower-fonts", function() {
+  gulp.src(`${bowerDir}/materialize/dist/fonts/*/**`)
+  .pipe(gulp.dest(`${dest}/fonts`));
 });
