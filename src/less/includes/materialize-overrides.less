@@ -1,0 +1,28 @@
+/* Tabs */
+
+.tabs {
+  .tab {
+    a {
+      /*border: 1px solid black;*/
+      border-bottom: 1px solid black;
+      padding: 0px;
+      /*background-color: #222;*/
+      &.active {
+        border: 1px solid black;
+        border-bottom: 0px;
+        /*background-color: #999;*/
+      }
+    }
+  }
+  .indicator {
+    margin: 0 10px;
+    height: 6px;
+  }
+}
+
+.tab-container {
+  &>div {
+    border: 1px solid black;
+    border-top: 0px;
+  }
+}
