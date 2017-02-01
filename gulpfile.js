@@ -136,7 +136,7 @@ gulp.task("watch", ["default"], function () {
   gulp.watch([`${src}/js/main/{main,popup,background}.ts`],["typescript"]);
 
   // LESS
-  gulp.watch([`${src}/less/*.less`, `${src}/less/includes/base.less`], ["less"]);
+  gulp.watch([`${src}/less/**/*.less`], ["less"]);
 
   // Bower JS
   gulp.watch(mainBowerFiles("**/*.js"), ["bower-js"]);
