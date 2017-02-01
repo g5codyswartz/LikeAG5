@@ -29,8 +29,8 @@ var watchify = require("watchify"); // live reload could be an altenative
 var filter = require("gulp-filter");
 var concat = require("gulp-concat");
 
-var dest = "./dist";
-var src = "./src";
+var dest = "dist";
+var src = "src";
 var bowerDir = "./bower_components";
 
 /** 
@@ -124,7 +124,7 @@ gulp.task("bower-fonts", function () {
     .pipe(gulp.dest(`${dest}/fonts`));
 });
 
-gulp.task("watch", function () {
+gulp.task("watch", ["default"], function () {
 
   // Basic copy of html
   gulp.watch([
@@ -132,4 +132,20 @@ gulp.task("watch", function () {
     `${src}/*.html`,
     `${src}/manifest.json`
   ], ["copy"]);
+
+  // Typescript
+  gulp.watch([`${src}/js/main/{main,popup,background}.ts`],["typescript"]);
+
+  // LESS
+  gulp.watch([`${src}/less/*.less`, `${src}/less/includes/base.less`], ["less"]);
+
+  // Bower JS
+  gulp.watch(mainBowerFiles("**/*.js"), ["bower-js"]);
+
+  // Bower CSS
+  gulp.watch(mainBowerFiles("**/*.css"), ["bower-css"]);
+
+  // Bower Fonts
+  gulp.watch(mainBowerFiles("**/fonts/**/*"), ["bower-fonts"]);
+
 });
