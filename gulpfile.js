@@ -94,7 +94,7 @@ gulp.task("less", function () {
 
 gulp.task("copy", function () {
   return gulp.src([
-    `${src}/{fonts,images,js/libraries}/**/*`,
+    `${src}/{images,js/libraries}/**/*`,
     `${src}/*.html`,
     `${src}/manifest.json`
   ])
@@ -125,8 +125,10 @@ gulp.task("bower-fonts", function () {
 });
 
 gulp.task("watch", function () {
+
+  // Basic copy of html
   gulp.watch([
-    `${src}/{fonts,images,js/libraries}/**/*`,
+    `${src}/{images,js/libraries}/**/*`,
     `${src}/*.html`,
     `${src}/manifest.json`
   ], ["copy"]);
