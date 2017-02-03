@@ -1,5 +1,6 @@
-/* Tabs */
 
+
+/* Tabs */
 .tabs {
   .tab {
     a {
@@ -7,10 +8,15 @@
       border-bottom: 1px solid black;
       padding: 0px;
       /*background-color: #222;*/
+      color: @mat-orange-accent-2;
       &.active {
         border: 1px solid black;
         border-bottom: 0px;
+        color: @mat-orange;
         /*background-color: #999;*/
+      }
+      &:hover {
+        color: @mat-orange-accent-2-hover;
       }
     }
   }
