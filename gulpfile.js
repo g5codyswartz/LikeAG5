@@ -12,6 +12,7 @@ var gulp = require("gulp");
 var gulpSequence = require("gulp-sequence");
 var rename = require("gulp-rename");
 var del = require("del");
+var concat = require("gulp-concat");
 var path = require("path");
 var exists = require("path-exists").sync;
 var es = require("event-stream");
@@ -27,18 +28,50 @@ var mainBowerFiles = require("main-bower-files");
 // Unused so far, but useful
 var watchify = require("watchify"); // live reload could be an altenative
 var filter = require("gulp-filter");
-var concat = require("gulp-concat");
 
 var dest = "dist";
 var src = "src";
-var bowerDir = "./bower_components";
+var paths = {
+  src: "src",
+  bower: {
+    components: "bower_components",
+    css: mainBowerFiles("**/*.css"),
+    fonts: mainBowerFiles("**/fonts/**/*"),
+    js: mainBowerFiles("**/*.js")
+  },
+  copy: {
+    dest: `${dest}`,
+    src: [
+      `${src}/{images,js/libraries}/**/*`,
+      `${src}/*.html`,
+      `${src}/manifest.json`
+    ]
+  },
+  css: {
+    dest: `${dest}/css`
+  },
+  fonts: {
+    dest: `${dest}/fonts`
+  },
+  js: {
+    dest: `${dest}/js`
+  },
+  less: {
+    srcBuild: [`${src}/less/*.less`, `${src}/less/includes/base.less`],
+    srcWatch: `${src}/less/**/*.less`
+  },
+  ts: {
+    src: `${src}/ts/main/{main,popup,background}.ts`
+  }
+};
+
 
 /** 
  * http://stackoverflow.com/questions/27100383/how-to-select-minified-dependencies-with-gulp-and-main-bower-files
  * https://gist.github.com/vincent-zurczak/424c5d136063c120ee18
  * Maybe include maps if they exist and then flatten this
  * Or just bundle them into vendors and do my own mapping and minifying #TODO
-*/
+ */
 var getMinFiles = (arr) => {
   return arr.map(function (path, index, arr) {
     var newPath = path.replace(/.([^.]+)$/g, ".min.$1");
@@ -50,34 +83,36 @@ var getMinFiles = (arr) => {
 gulp.task("default", gulpSequence("cleanup", ["typescript", "less", "copy", "bower-js", "bower-css", "bower-fonts"]));
 
 gulp.task("cleanup", function () {
-  return del(`${dest}`);
+  return del(dest);
 });
 
 gulp.task("typescript", function (done) {
-  glob(`${src}/js/main/{main,popup,background}.ts`, function (err, files) {
+  glob(paths.ts.src, function (err, files) {
     if (err) done(err);
 
     var tasks = files.map(function (entry) {
       //console.log("ENTRY", entry);
       var filename = path.basename(entry);
       return browserify({
-        basedir: ".",
-        debug: true,
-        entries: [entry],
-        cache: {},
-        packageCache: {}
-      })
+          basedir: ".",
+          debug: true,
+          entries: [entry],
+          cache: {},
+          packageCache: {}
+        })
         .plugin(tsify)
         .bundle()
         .pipe(source(filename))
         .pipe(buffer())
-        .pipe(sourcemaps.init({ loadMaps: true }))
+        .pipe(sourcemaps.init({
+          loadMaps: true
+        }))
         .pipe(uglify())
         .pipe(rename({
           extname: ".js"
         }))
         .pipe(sourcemaps.write("./"))
-        .pipe(gulp.dest(`${dest}/js`));
+        .pipe(gulp.dest(paths.js.dest));
     });
 
     es.merge(tasks).on("end", done);
@@ -85,66 +120,58 @@ gulp.task("typescript", function (done) {
 });
 
 gulp.task("less", function () {
-  return gulp.src([`${src}/less/*.less`, `${src}/less/includes/base.less`])
+  return gulp.src(paths.less.srcBuild)
     .pipe(sourcemaps.init())
     .pipe(less())
     .pipe(sourcemaps.write("./"))
-    .pipe(gulp.dest(`${dest}/css`));
+    .pipe(gulp.dest(paths.css.dest));
 });
 
 gulp.task("copy", function () {
-  return gulp.src([
-    `${src}/{images,js/libraries}/**/*`,
-    `${src}/*.html`,
-    `${src}/manifest.json`
-  ])
-    .pipe(gulp.dest(`${dest}`));
+  return gulp.src(paths.copy.src)
+    .pipe(gulp.dest(paths.copy.dest));
 });
 
 gulp.task("bower-js", function () {
-  return gulp.src(mainBowerFiles("**/*.js"))
+  return gulp.src(paths.bower.js)
     //.pipe(filter("**/*.js"))
     // doubles build time, no real reason for an extension
     //.pipe(sourcemaps.init())
     .pipe(concat("vendor.js"))
     //.pipe(uglify())
     //.pipe(sourcemaps.write("./"))
-    .pipe(gulp.dest(`${dest}/js`));
+    .pipe(gulp.dest(paths.js.dest));
 });
 
 gulp.task("bower-css", function () {
-  gulp.src(mainBowerFiles("**/*.css"))
+  gulp.src(paths.bower.css)
     .pipe(concat("vendor.css"))
-    .pipe(gulp.dest(`${dest}/css`));
+    .pipe(gulp.dest(paths.css.dest));
 });
 
 gulp.task("bower-fonts", function () {
-  return gulp.src(mainBowerFiles("**/fonts/**/*"))
-    .pipe(gulp.dest(`${dest}/fonts`));
+  return gulp.src(paths.bower.fonts)
+    .pipe(gulp.dest(paths.fonts.dest));
 });
 
 gulp.task("watch", ["default"], function () {
 
   // Basic copy of html
-  gulp.watch([
-    `${src}/{images,js/libraries}/**/*`,
-    `${src}/*.html`,
-    `${src}/manifest.json`
-  ], ["copy"]);
+  gulp.watch(paths.copy.src, ["copy"]);
 
   // Typescript
-  gulp.watch([`${src}/js/main/{main,popup,background}.ts`],["typescript"]);
+  gulp.watch(paths.ts.src, ["typescript"]);
 
   // LESS
-  gulp.watch([`${src}/less/**/*.less`], ["less"]);
+  gulp.watch(paths.less.srcWatch, ["less"]);
 
   // Bower JS
-  gulp.watch(mainBowerFiles("**/*.js"), ["bower-js"]);
+  gulp.watch(paths.bower.js, ["bower-js"]);
 
   // Bower CSS
-  gulp.watch(mainBowerFiles("**/*.css"), ["bower-css"]);
+  gulp.watch(paths.bower.css, ["bower-css"]);
 
   // Bower Fonts
-  gulp.watch(mainBowerFiles("**/fonts/**/*"), ["bower-fonts"]);
+  gulp.watch(paths.bower.fonts, ["bower-fonts"]);
 
 });
