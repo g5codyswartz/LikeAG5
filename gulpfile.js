@@ -37,7 +37,8 @@ var paths = {
     components: "bower_components",
     css: mainBowerFiles("**/*.css"),
     fonts: mainBowerFiles("**/fonts/**/*"),
-    js: mainBowerFiles("**/*.js")
+    js: mainBowerFiles("**/*.js"),
+    simpleIcons: mainBowerFiles("**/simple-icons/icons/*.svg")
   },
   copy: {
     dest: `${dest}`,
@@ -52,6 +53,9 @@ var paths = {
   },
   fonts: {
     dest: `${dest}/fonts`
+  },
+  icons: {
+    dest: `${dest}/images/simple-icons`
   },
   js: {
     dest: `${dest}/js`
@@ -80,7 +84,10 @@ var getMinFiles = (arr) => {
 };
 
 // Cleanup and then build (in parallel)
-gulp.task("default", gulpSequence("cleanup", ["typescript", "less", "copy", "bower-js", "bower-css", "bower-fonts"]));
+gulp.task("default", gulpSequence("cleanup", [
+  "typescript", "less", "copy",
+  "bower-js", "bower-css", "bower-fonts", "bower-icons"
+]));
 
 gulp.task("cleanup", function () {
   return del(dest);
@@ -152,6 +159,11 @@ gulp.task("bower-css", function () {
 gulp.task("bower-fonts", function () {
   return gulp.src(paths.bower.fonts)
     .pipe(gulp.dest(paths.fonts.dest));
+});
+
+gulp.task("bower-icons", function () {
+  return gulp.src(paths.bower.simpleIcons)
+    .pipe(gulp.dest(paths.icons.dest));
 });
 
 gulp.task("watch", ["default"], function () {

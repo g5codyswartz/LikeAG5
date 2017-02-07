@@ -27,6 +27,12 @@
         "./dist/css/materialize.css",
         "./dist/fonts/*/**"
       ]
+    },
+    "simple-icons": {
+      "main": [
+        "./icons/*.svg",
+        "./images/**"
+      ]
     }
   }
 }
