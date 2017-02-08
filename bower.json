@@ -18,7 +18,8 @@
   "dependencies": {
     "jquery": "^3.1.1",
     "materialize": "^0.97.8",
-    "simple-icons": "gh-pages"
+    "simple-icons": "gh-pages",
+    "svg-convert": "master"
   },
   "overrides": {
     "materialize": {
