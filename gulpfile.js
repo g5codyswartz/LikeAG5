@@ -186,4 +186,7 @@ gulp.task("watch", ["default"], function () {
   // Bower Fonts
   gulp.watch(paths.bower.fonts, ["bower-fonts"]);
 
+  // Bower Simple Icons
+  gulp.watch(paths.bower.simpleIcons, ["bower-simpleIcons"]);
+
 });
